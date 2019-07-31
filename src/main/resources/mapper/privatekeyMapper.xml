@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.message.dao.PrivatekeyDao">
+	<!-- 动态条件查询privatekey -->
+	<select id="getAllPrivatekey" parameterType="Privatekey" resultType="Privatekey">SELECT * FROM privatekey
+		<where> 
+			<if test=" id !=null and id !='' ">and id=#{id}</if>  
+			<if test=" privatekey !=null and privatekey !='' ">and privatekey=#{privatekey}</if> 
+		</where> 
+	</select>
+	<!-- 动态保存privatekey -->
+	<insert parameterType="Privatekey" id="addPrivatekey">INSERT INTO privatekey
+		<trim prefix="(" suffix=")" suffixOverrides=","> 
+			<if test=" id !=null and id !='' ">id,</if>  
+			<if test=" privatekey !=null and privatekey !='' ">privatekey,</if> 
+		</trim>  
+		<trim prefix="values(" suffix=")" suffixOverrides=","> 
+			<if test=" id !=null and id !='' ">#{id},</if>  
+			<if test=" privatekey !=null and privatekey !='' ">#{privatekey},</if> 
+		</trim>  
+		<selectKey resultType="int" keyProperty="id" order="AFTER">select LAST_INSERT_ID()</selectKey> 
+	</insert>
+	<!-- 动态更新privatekey -->
+	<update id="updatePrivatekey" parameterType="Privatekey">update privatekey set 
+		<trim suffixOverrides=","> 
+			<if test=" id !=null and id !='' ">id=#{id},</if>  
+			<if test=" privatekey !=null and privatekey !='' ">privatekey=#{privatekey},</if> 
+		</trim> WHERE id = #{id}
+	</update>
+</mapper>
