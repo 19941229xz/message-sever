@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.message.dao.TemplateDao">
+	<!-- 动态条件查询template -->
+	<select id="getAllTemplate" parameterType="Template" resultType="Template">SELECT * FROM template
+		<where> 
+			<if test=" id !=null and id !='' ">and id=#{id}</if>  
+			<if test=" code !=null and code !='' ">and code=#{code}</if>  
+			<if test=" description !=null and description !='' ">and description=#{description}</if> 
+		</where> 
+	</select>
+	<!-- 动态保存template -->
+	<insert parameterType="Template" id="addTemplate">INSERT INTO template
+		<trim prefix="(" suffix=")" suffixOverrides=","> 
+			<if test=" id !=null and id !='' ">id,</if>  
+			<if test=" code !=null and code !='' ">code,</if>  
+			<if test=" description !=null and description !='' ">description,</if> 
+		</trim>  
+		<trim prefix="values(" suffix=")" suffixOverrides=","> 
+			<if test=" id !=null and id !='' ">#{id},</if>  
+			<if test=" code !=null and code !='' ">#{code},</if>  
+			<if test=" description !=null and description !='' ">#{description},</if> 
+		</trim>  
+		<selectKey resultType="int" keyProperty="id" order="AFTER">select LAST_INSERT_ID()</selectKey> 
+	</insert>
+	<!-- 动态更新template -->
+	<update id="updateTemplate" parameterType="Template">update template set 
+		<trim suffixOverrides=","> 
+			<if test=" id !=null and id !='' ">id=#{id},</if>  
+			<if test=" code !=null and code !='' ">code=#{code},</if>  
+			<if test=" description !=null and description !='' ">description=#{description},</if> 
+		</trim> WHERE id = #{id}
+	</update>
+</mapper>
