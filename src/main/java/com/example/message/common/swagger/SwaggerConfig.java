@@ -49,6 +49,7 @@ public class SwaggerConfig {
                 .globalResponseMessage(RequestMethod.PUT, responseMessageList)
                 .globalResponseMessage(RequestMethod.DELETE, responseMessageList)
         		.apiInfo(apiInfo()).select()
+
 //                   当前包路径
                    .apis(RequestHandlerSelectors.basePackage("com"))
 //                   .apis(RequestHandlerSelectors.basePackage("com.example.demo.common"))  // 将loginController 移到common中
