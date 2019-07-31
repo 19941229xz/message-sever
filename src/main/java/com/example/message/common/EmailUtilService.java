@@ -14,7 +14,9 @@ public interface EmailUtilService {
      * @param emailAddress 发送的目标邮箱
      * @return
      */
-    public boolean sendNormalText(String text,String emailAddress);
+    public void sendNormalText(String emailToken);
+
+    public String getEmailToken(String email,String content,String title);
 
 
 
