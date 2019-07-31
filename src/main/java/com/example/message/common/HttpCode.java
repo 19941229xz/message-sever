@@ -8,6 +8,9 @@ public enum HttpCode {
     ;
 
 
+
+
+
     private int code;
 
     private String msg;
