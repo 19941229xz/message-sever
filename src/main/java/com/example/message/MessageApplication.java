@@ -1,4 +1,4 @@
-package com.example.message.common;
+package com.example.message;
 
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
