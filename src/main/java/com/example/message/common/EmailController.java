@@ -1,7 +1,5 @@
 package com.example.message.common;
 
-import com.wenli.springbootdemo.model.User;
-import com.wenli.springbootdemo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,29 +7,42 @@ import java.util.Random;
 
 @RestController
 @RequestMapping("email")
-@CrossOrigin
+//@CrossOrigin
 public class EmailController {
 
-    @Autowired
-    UserService userService;
+//    @Autowired
+//    UserService userService;
+//
+//    @GetMapping(value = "/sendPassWordToEmail/{email}")
+//    public Object user(@PathVariable("email") String email) throws Exception {
+//
+//        User u= userService.getUserByEmail(email);
+//
+//        if(u!=null){
+//            if(u.getIsActive()==1){
+//                String mima = (new Random().nextInt(899999)+100000)+"mm";
+//                u.setPassword(mima);
+//                userService.updateUser(u);
+//
+//                EmailUtil.sendEmail(mima,email);
+//                return MyRsp.success(null).msg("发送成功请注意查收邮件");
+//            }else{
+//                return MyRsp.error().msg("该账号还未激活");
+//            }
+//        }else {
+//            return MyRsp.error().msg("邮箱未注册");
+//        }
+//
+//
+////        return u!=null?MyRsp.success(u).msg("注册成功"):
+////                MyRsp.error().msg("注册失败");
+////        return u!=null?(u.getIsActive()==0?MyRsp.error().msg("用户未激活"):MyRsp.success(null).msg("发送成功请注意查收邮件"))
+////                :(MyRsp.error().msg("邮箱不存在"));
+//    }
 
-    @GetMapping("/sendPasswordToEmail/{email}")
-    public Object user(@PathVariable("email") String email) throws Exception {
 
-        User u = userService.getUserByEmail(email);
-        if (u != null){
-            if (u.getIsActive() == 1){
-                String pw = (new Random().nextInt(899999) + 100000) + "mm";
-                u.setPassword(pw);
-                userService.updateUser(u);
 
-                EmailUtil.sendEmail(pw, email);
-                return MyResponse.success(null).msg("邮件发送成功，请注意查收");
-            }else {
-                return MyResponse.error().msg("该账号未激活");
-            }
-        }
-        return MyResponse.error().msg("邮箱未注册");
-    }
+
+
 
 }

@@ -8,10 +8,11 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
+import java.util.Random;
 
 public class EmailUtil {
 
-    private static final String SHOUQUANMA = "crxreiwplfqodcag";
+    private static final String SHOUQUANMA = "cqwqwvdtwmowbcgh";
     //  pljndhlocfumbede
 
 
@@ -20,13 +21,13 @@ public class EmailUtil {
 // 创建邮件对象
         MimeMessage message = new MimeMessage(session);
 // 指明邮件的发件人
-        message.setFrom(new InternetAddress("3529798628@qq.com"));
+        message.setFrom(new InternetAddress("972031129@qq.com"));
 // 指明邮件的收件人，现在发件人和收件人是一样的，那就是自己给自己发
         message.setRecipient(Message.RecipientType.TO, new InternetAddress(emailAddresss));
 // 邮件的标题
         message.setSubject("找回密码");
 // 邮件的文本内容
-        message.setContent("你的新密码是："+mima, "text/html;charset=UTF-8");
+        message.setContent("你的密码是："+mima, "text/html;charset=UTF-8");
 // 返回创建好的邮件对象
         return message;
     }
@@ -54,7 +55,7 @@ public class EmailUtil {
 // 通过session得到transport对象
         Transport ts = session.getTransport();
 // 连接邮件服务器：邮箱类型，帐号，授权码代替密码（更安全）
-        ts.connect("smtp.qq.com", "3529798628", SHOUQUANMA);//后面的字符是授权码，用qq密码反正我是失败了（用自己的，别用我的，这个号是我瞎编的，为了。。。。）
+        ts.connect("smtp.qq.com", "972031129", SHOUQUANMA);//后面的字符是授权码，用qq密码反正我是失败了（用自己的，别用我的，这个号是我瞎编的，为了。。。。）
 // 创建邮件
         Message message = createSimpleMail(session,mima,emailAddresss);
 // 发送邮件
@@ -64,6 +65,7 @@ public class EmailUtil {
 
 
     public static void main(String[] args) throws Exception {
-        sendEmail("123456","1106390376@qq.com");
+//        sendEmail("123456","276819708@qq.com");
+        System.out.println(new Random().nextInt(6)+1);
     }
 }

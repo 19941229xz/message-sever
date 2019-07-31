@@ -1,4 +1,4 @@
-package com.example.message.config;
+package com.example.message.common;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.EnableCaching;
@@ -28,6 +28,8 @@ public class RedisCacheConfig {
 
         return container;
     }
+
+
 
     @Bean
     MessageListenerAdapter listenerAdapter(Receiver receiver) {

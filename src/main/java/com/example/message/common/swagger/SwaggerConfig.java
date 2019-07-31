@@ -1,11 +1,13 @@
 package com.example.message.common.swagger;
 
-import com.wenli.springbootdemo.common.HttpCode;
-import com.wenli.springbootdemo.config.SystemConfig;
+import com.example.message.common.HttpCode;
+import com.example.message.common.SystemConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.RequestMethod;
+//import org.wlxy.example.common.HttpCode;
+//import org.wlxy.example.config.SystemConfig;
 import springfox.documentation.builders.*;
 import springfox.documentation.schema.ModelRef;
 import springfox.documentation.service.ApiInfo;
@@ -33,7 +35,7 @@ public class SwaggerConfig {
     	ParameterBuilder ticketPar = new ParameterBuilder();
         List<Parameter> pars = new ArrayList<Parameter>();  
     	ticketPar.name("ticket").description("用户token")
-    	.modelRef(new ModelRef("string")).parameterType("header") 
+    	.modelRef(new ModelRef("string")).parameterType("header")
     	.required(false).build(); //header中的ticket参数非必填，传空也可以
     	pars.add(ticketPar.build()); 
     	
@@ -50,7 +52,7 @@ public class SwaggerConfig {
                 .globalResponseMessage(RequestMethod.DELETE, responseMessageList)
         		.apiInfo(apiInfo()).select()
 //                   当前包路径
-                   .apis(RequestHandlerSelectors.basePackage("com.wenli.springbootdemo"))
+                   .apis(RequestHandlerSelectors.basePackage("org.wlxy.example"))
 //                   .apis(RequestHandlerSelectors.basePackage("com.example.demo.common"))  // 将loginController 移到common中
                     .paths(PathSelectors.any()).build().globalOperationParameters(pars);
         
