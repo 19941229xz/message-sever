@@ -12,7 +12,36 @@ import java.util.Date;
 public class JwtUtil {
 
 
-    private static final long expire_time = 24*60*60 * 1000;
+    private static final long expire_time = 5 * 60 * 1000; //五分钟内有效
+
+    //通过邮箱 邮箱内容 和后台私钥 生成emailToken
+    public static String createEmailToken(String email, String content, String privateKey) {
+        //过期时间
+        Date date = new Date(System.currentTimeMillis() + expire_time);
+        Algorithm algorithm = Algorithm.HMAC256(privateKey);
+        return JWT.create().withClaim("email", email).withClaim("content", content)
+                .withExpiresAt(date).sign(algorithm);
+    }
+
+    //解码emailToken 获取邮箱地址
+    public static String getEmailfromEmailToken(String emailToken){
+        try {
+            DecodedJWT jwt = JWT.decode(emailToken);
+            return jwt.getClaim("email").asString();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    //解码emailToken 获取发送内容
+    public static String getContentfromEmailToken(String emailToken){
+        try {
+            DecodedJWT jwt = JWT.decode(emailToken);
+            return jwt.getClaim("content").asString();
+        } catch (Exception e) {
+            return null;
+        }
+    }
 
     // 校验方法
     public static boolean verify(String token, String username, String secret) {
@@ -36,29 +65,27 @@ public class JwtUtil {
     }
 
     //签名方法
-    public static String sign(String username,String secret){
+    public static String sign(String username, String secret) {
         //过期时间
-        Date date = new Date(System.currentTimeMillis()+expire_time);
+        Date date = new Date(System.currentTimeMillis() + expire_time);
 
         Algorithm algorithm = Algorithm.HMAC256(secret);
 
-        return JWT.create().withClaim("username",username)
+        return JWT.create().withClaim("username", username)
                 .withExpiresAt(date).sign(algorithm);
-
 
 
     }
 
 
-    public static String  getUsername(String token){
+    public static String getUsername(String token) {
 
         try {
             DecodedJWT jwt = JWT.decode(token);
             return jwt.getClaim("username").asString();
-        }catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
-
 
 
     }

@@ -1,45 +1,27 @@
 package com.example.message.common;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import io.swagger.annotations.Api;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Random;
 
+@Api(value = "发邮件模块接口",description = "这是一个发邮件模块的接口文档")
+@Slf4j
 @RestController
-@RequestMapping("email")
-//@CrossOrigin
+@RequestMapping("emailSender")
 public class EmailController {
 
-//    @Autowired
-//    UserService userService;
-//
-//    @GetMapping(value = "/sendPassWordToEmail/{email}")
-//    public Object user(@PathVariable("email") String email) throws Exception {
-//
-//        User u= userService.getUserByEmail(email);
-//
-//        if(u!=null){
-//            if(u.getIsActive()==1){
-//                String mima = (new Random().nextInt(899999)+100000)+"mm";
-//                u.setPassword(mima);
-//                userService.updateUser(u);
-//
-//                EmailUtil.sendEmail(mima,email);
-//                return MyRsp.success(null).msg("发送成功请注意查收邮件");
-//            }else{
-//                return MyRsp.error().msg("该账号还未激活");
-//            }
-//        }else {
-//            return MyRsp.error().msg("邮箱未注册");
-//        }
-//
-//
-////        return u!=null?MyRsp.success(u).msg("注册成功"):
-////                MyRsp.error().msg("注册失败");
-////        return u!=null?(u.getIsActive()==0?MyRsp.error().msg("用户未激活"):MyRsp.success(null).msg("发送成功请注意查收邮件"))
-////                :(MyRsp.error().msg("邮箱不存在"));
-//    }
+    @GetMapping("/sendNormalEmail/{emailToken}")
+    public Object sendNormalEmail(@PathVariable("emailToken") String emailToken){
+        //Todo
 
+        //Todo jwtUtil 验证并解码 emailToken 获取邮箱地址
+
+        //Todo 调用EmailUtilService 发送邮件
+
+
+        return MyRsp.success(null);
+    }
 
 
 
