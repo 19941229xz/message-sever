@@ -24,14 +24,14 @@ import java.util.List;
 public class PrivatekeyServiceImpl implements PrivatekeyService {
 
 
-	@Autowired
+    @Autowired
     PrivatekeyDao privatekeyDao;
 
-	@Override
+    @Override
     @Transactional(readOnly = true)
-	public Object getAllPrivatekey(PageParam<Privatekey> pageParam){
-    
-    	PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
+    public Object getAllPrivatekey(PageParam<Privatekey> pageParam){
+
+        PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
         for(int i=0;i<pageParam.getOrderParams().length;i++){
             PageHelper.orderBy(pageParam.getOrderParams()[i]);
         }
@@ -41,16 +41,16 @@ public class PrivatekeyServiceImpl implements PrivatekeyService {
         PageInfo<Privatekey> privatekeyPageInfo = new PageInfo<Privatekey>(privatekeyList);
 
         return privatekeyPageInfo;
-    
+
     }
 
-	@CacheEvict(value = "privatekeys",key = "#p0")
+    @CacheEvict(value = "privatekeys",key = "#p0")
     @Override
     public boolean removePrivatekeyById(int id){
-    	return privatekeyDao.removePrivatekeyById(id)==1;
+        return privatekeyDao.removePrivatekeyById(id)==1;
     }
 
-	@CachePut(value = "privatekeys",key = "#p0.id")
+    @CachePut(value = "privatekeys",key = "#p0.id")
     @Override
     public Object addPrivatekey(Privatekey privatekey){
         privatekeyDao.addPrivatekey(privatekey);
@@ -58,21 +58,22 @@ public class PrivatekeyServiceImpl implements PrivatekeyService {
         return privatekeyDao.getPrivatekeyById(privatekey.getId());
     }
 
-	@Override
+    @CacheEvict(value = "privatekeys",key = "#p0.id")
+    @Override
     public boolean updatePrivatekey(Privatekey privatekey){
-    	if(StringUtils.isEmpty(privatekey.getId())){
+        if(StringUtils.isEmpty(privatekey.getId())){
             throw new MyException(HttpCode.ERROR).msg("通过id修改privatekey时，id不能为空");
         }
 
         return privatekeyDao.updatePrivatekey(privatekey)==1;
     }
 
-	@Cacheable(key = "#p0",value="privatekeys")
+    @Cacheable(key = "#p0",value="privatekeys")
     @Override
     @Transactional(readOnly = true)
     public Privatekey getPrivatekeyById(int id){
-    	return privatekeyDao.getPrivatekeyById(id);
-    	
+        return privatekeyDao.getPrivatekeyById(id);
+
     }
 
 

@@ -24,14 +24,14 @@ import java.util.List;
 public class TemplateServiceImpl implements TemplateService {
 
 
-	@Autowired
+    @Autowired
     TemplateDao templateDao;
 
-	@Override
+    @Override
     @Transactional(readOnly = true)
-	public Object getAllTemplate(PageParam<Template> pageParam){
-    
-    	PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
+    public Object getAllTemplate(PageParam<Template> pageParam){
+
+        PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
         for(int i=0;i<pageParam.getOrderParams().length;i++){
             PageHelper.orderBy(pageParam.getOrderParams()[i]);
         }
@@ -41,16 +41,16 @@ public class TemplateServiceImpl implements TemplateService {
         PageInfo<Template> templatePageInfo = new PageInfo<Template>(templateList);
 
         return templatePageInfo;
-    
+
     }
 
-	@CacheEvict(value = "templates",key = "#p0")
+    @CacheEvict(value = "templates",key = "#p0")
     @Override
     public boolean removeTemplateById(int id){
-    	return templateDao.removeTemplateById(id)==1;
+        return templateDao.removeTemplateById(id)==1;
     }
 
-	@CachePut(value = "templates",key = "#p0.id")
+    @CachePut(value = "templates",key = "#p0.id")
     @Override
     public Object addTemplate(Template template){
         templateDao.addTemplate(template);
@@ -58,21 +58,22 @@ public class TemplateServiceImpl implements TemplateService {
         return templateDao.getTemplateById(template.getId());
     }
 
-	@Override
+    @CacheEvict(value = "templates",key = "#p0.id")
+    @Override
     public boolean updateTemplate(Template template){
-    	if(StringUtils.isEmpty(template.getId())){
+        if(StringUtils.isEmpty(template.getId())){
             throw new MyException(HttpCode.ERROR).msg("通过id修改template时，id不能为空");
         }
 
         return templateDao.updateTemplate(template)==1;
     }
 
-	@Cacheable(key = "#p0",value="templates")
+    @Cacheable(key = "#p0",value="templates")
     @Override
     @Transactional(readOnly = true)
     public Template getTemplateById(int id){
-    	return templateDao.getTemplateById(id);
-    	
+        return templateDao.getTemplateById(id);
+
     }
 
 

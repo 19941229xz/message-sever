@@ -5,21 +5,30 @@
 	<!-- 动态条件查询template -->
 	<select id="getAllTemplate" parameterType="Template" resultType="Template">SELECT * FROM template
 		<where> 
+			<!-- 主键ID -->  
 			<if test=" id !=null and id !='' ">and id=#{id}</if>  
+			<!-- 模板的Code -->  
 			<if test=" code !=null and code !='' ">and code=#{code}</if>  
+			<!-- 模板的描述 -->  
 			<if test=" description !=null and description !='' ">and description=#{description}</if> 
 		</where> 
 	</select>
 	<!-- 动态保存template -->
 	<insert parameterType="Template" id="addTemplate">INSERT INTO template
 		<trim prefix="(" suffix=")" suffixOverrides=","> 
+			<!-- 主键ID -->  
 			<if test=" id !=null and id !='' ">id,</if>  
+			<!-- 模板的Code -->  
 			<if test=" code !=null and code !='' ">code,</if>  
+			<!-- 模板的描述 -->  
 			<if test=" description !=null and description !='' ">description,</if> 
 		</trim>  
 		<trim prefix="values(" suffix=")" suffixOverrides=","> 
+			<!-- 主键ID -->  
 			<if test=" id !=null and id !='' ">#{id},</if>  
+			<!-- 模板的Code -->  
 			<if test=" code !=null and code !='' ">#{code},</if>  
+			<!-- 模板的描述 -->  
 			<if test=" description !=null and description !='' ">#{description},</if> 
 		</trim>  
 		<selectKey resultType="int" keyProperty="id" order="AFTER">select LAST_INSERT_ID()</selectKey> 
@@ -27,8 +36,11 @@
 	<!-- 动态更新template -->
 	<update id="updateTemplate" parameterType="Template">update template set 
 		<trim suffixOverrides=","> 
+			<!-- 主键ID -->  
 			<if test=" id !=null and id !='' ">id=#{id},</if>  
+			<!-- 模板的Code -->  
 			<if test=" code !=null and code !='' ">code=#{code},</if>  
+			<!-- 模板的描述 -->  
 			<if test=" description !=null and description !='' ">description=#{description},</if> 
 		</trim> WHERE id = #{id}
 	</update>

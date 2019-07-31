@@ -11,7 +11,7 @@ import com.example.message.service.TemplateService;
 
 import javax.validation.Valid;
 
-@Api(value = "template模块接口",description = "这是一个模块的接口文档")
+@Api(value = "template模块接口",description = "这是一个短信发送模板模块的接口文档")
 @RestController
 @Slf4j
 @CrossOrigin
@@ -20,7 +20,7 @@ public class TemplateController {
 	@Autowired
     TemplateService templateService;
 
-	@ApiOperation("查询所有 支持多条件分页排序查询")
+	@ApiOperation("查询所有短信发送模板 支持多条件分页排序查询")
     @PostMapping("/getAllTemplate")
     public Object getAllTemplate(@RequestBody PageParam<Template> pageParam){
         return MyRsp.success(templateService.getAllTemplate(pageParam)).msg("查询成功");

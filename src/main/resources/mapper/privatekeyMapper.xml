@@ -5,18 +5,24 @@
 	<!-- 动态条件查询privatekey -->
 	<select id="getAllPrivatekey" parameterType="Privatekey" resultType="Privatekey">SELECT * FROM privatekey
 		<where> 
+			<!-- 主键ID -->  
 			<if test=" id !=null and id !='' ">and id=#{id}</if>  
+			<!-- 附加的加密字符串 -->  
 			<if test=" privatekey !=null and privatekey !='' ">and privatekey=#{privatekey}</if> 
 		</where> 
 	</select>
 	<!-- 动态保存privatekey -->
 	<insert parameterType="Privatekey" id="addPrivatekey">INSERT INTO privatekey
 		<trim prefix="(" suffix=")" suffixOverrides=","> 
+			<!-- 主键ID -->  
 			<if test=" id !=null and id !='' ">id,</if>  
+			<!-- 附加的加密字符串 -->  
 			<if test=" privatekey !=null and privatekey !='' ">privatekey,</if> 
 		</trim>  
 		<trim prefix="values(" suffix=")" suffixOverrides=","> 
+			<!-- 主键ID -->  
 			<if test=" id !=null and id !='' ">#{id},</if>  
+			<!-- 附加的加密字符串 -->  
 			<if test=" privatekey !=null and privatekey !='' ">#{privatekey},</if> 
 		</trim>  
 		<selectKey resultType="int" keyProperty="id" order="AFTER">select LAST_INSERT_ID()</selectKey> 
@@ -24,7 +30,9 @@
 	<!-- 动态更新privatekey -->
 	<update id="updatePrivatekey" parameterType="Privatekey">update privatekey set 
 		<trim suffixOverrides=","> 
+			<!-- 主键ID -->  
 			<if test=" id !=null and id !='' ">id=#{id},</if>  
+			<!-- 附加的加密字符串 -->  
 			<if test=" privatekey !=null and privatekey !='' ">privatekey=#{privatekey},</if> 
 		</trim> WHERE id = #{id}
 	</update>
