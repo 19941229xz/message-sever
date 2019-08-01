@@ -3,7 +3,7 @@ mybatis:
   type-aliases-package: com.example.message.model
 
 server:
-  port: 20
+  port: 6666
 
 logging:
   level:
