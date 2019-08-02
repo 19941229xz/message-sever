@@ -11,14 +11,14 @@ import java.util.List;
 public interface EmailAddressManagementDao {
 
     @Select("select id,emailAddress,authorizationCode from emailaddressmanagement")
-    public List<EmailAddressManagement> selectAllEmail();
+    List<EmailAddressManagement> selectAllEmail();
 
-    public EmailAddressManagement getEmail();
+    EmailAddressManagement getEmail();
 
     @Delete("delete from emailaddressmanagement where id = #{id}")
-    public int deleteEmailById(int id);
+    int deleteEmailById(int id);
 
-    public int updateEmail(EmailAddressManagement emailAddressManagement);
+    int updateEmail(EmailAddressManagement emailAddressManagement);
 
-    public int addEmail(EmailAddressManagement emailAddressManagement);
+    int addEmail(EmailAddressManagement emailAddressManagement);
 }

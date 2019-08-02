@@ -8,13 +8,13 @@ import java.util.List;
 public interface EmailAddressManagementService {
 
 
-    public List<EmailAddressManagement> selectAllEmail();
+    List<EmailAddressManagement> selectAllEmail();
 
-    public EmailAddressManagement getEmail();
-    public boolean  deleteEmailById(int id);
+    EmailAddressManagement getEmail();
+    boolean  deleteEmailById(int id);
 
-    public boolean updateEmail(EmailAddressManagement emailAddressManagement);
+    boolean updateEmail(EmailAddressManagement emailAddressManagement);
 
-    public boolean addEmail(EmailAddressManagement emailAddressManagement);
+    boolean addEmail(EmailAddressManagement emailAddressManagement);
 
 }
