@@ -5,7 +5,7 @@ import org.apache.commons.lang.RandomStringUtils;
 
 /**
  * @program: message-sever
- * @description: 验证码，邀请码，4-6位数工具类
+ * @description: 验证码，邀请码，,随机加密字符串，4-6位数工具类
  * @author: BitCoc
  * @create: 2019-08-01 14:23
  */
