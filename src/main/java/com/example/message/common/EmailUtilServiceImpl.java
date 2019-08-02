@@ -67,7 +67,7 @@ public class EmailUtilServiceImpl implements EmailUtilService {
         String emailAddress=JwtUtil.getEmailfromEmailToken(emailCodeToken);
         // 通过token获取邮件标题
         String title = "验证码邮件";
-
+        //从emailAddressManagementService中定义的方法随机取出一个系统email和授权码
         String email=emailAddressManagementService.getEmail().getEmailAddress();
         String shouquanma=emailAddressManagementService.getEmail().getAuthorizationCode();
         //Todo 调用EmailUtilService 发送邮件
@@ -76,17 +76,19 @@ public class EmailUtilServiceImpl implements EmailUtilService {
             EmailUtil.sendEmail(text,emailAddress,title,email,shouquanma);
         } catch (Exception e) {
             e.printStackTrace();
-//            throw new MyException(HttpCode.ERROR).msg("邮件发送失败");
+
         }
 
-        //将验证码保存到redis中
+
     }
+
     //获取EmailCodeToken
     @Override
     public String getEmailCodeToken(EmailCodeTokenParam emailCodeTokenParam) {
         String code = String.valueOf(new Random().nextInt(8999) + 1000);
         System.out.println(code);
         String privateKey = privatekeyService.getPrivatekeyById(1).getPrivatekey();
+        //将验证码保存到redis中
         redisService.set(emailCodeTokenParam.getEmailAdress(),code);
         return JwtUtil.createEmailCodeToken(emailCodeTokenParam.getEmailAdress(),privateKey,code);
     }
@@ -105,7 +107,6 @@ public class EmailUtilServiceImpl implements EmailUtilService {
             redisService.remove(JwtUtil.getEmailfromEmailCodeToken(emailCodeToken));
             return  true;
         }else {
-           // throw  new MyException(HttpCode.ERROR).msg("验证码错误，或验证码已过期");
             return false;
         }
     }

@@ -26,10 +26,13 @@ public class EmailAddressManagementServiceImpl implements  EmailAddressManagemen
         }
     }
 
+    //从数据库随机获得一个存放的email跟授权码
     @Override
     public EmailAddressManagement getEmail() {
         List<EmailAddressManagement> emailAddressManagementList = emailAddressManagementDao.selectAllEmail();
+        //生成一个小于等于列表size的索引i
         int i = new Random().nextInt(emailAddressManagementList.size());
+        //取出索引为i的数据
         EmailAddressManagement emailAddressManagement = emailAddressManagementList.get(0);
         return  emailAddressManagement;
     }
