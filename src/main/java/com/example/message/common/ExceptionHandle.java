@@ -3,8 +3,10 @@ package com.example.message.common;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.validation.BindException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingPathVariableException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -39,7 +41,13 @@ public class ExceptionHandle {
         }else if(e instanceof AuthenticationException){
 
             return MyRsp.error().msg("身份认证失败");
-        }else {
+        }else if(e instanceof BindException){
+            BindException ex = (BindException)e;
+            return MyRsp.error().msg(ex.getBindingResult()
+                    .getFieldError().getDefaultMessage());
+        }
+
+        else {
             return MyRsp.error().msg("这是一个未知异常");
         }
 

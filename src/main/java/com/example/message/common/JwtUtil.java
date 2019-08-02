@@ -25,6 +25,14 @@ public class JwtUtil {
                 .withExpiresAt(date).sign(algorithm);
     }
 
+    public static String createEmailCodeToken(String email,String privateKey,String code) {
+        //过期时间
+        Date date = new Date(System.currentTimeMillis() + expire_time);
+        Algorithm algorithm = Algorithm.HMAC256(privateKey);
+        return JWT.create().withClaim("email", email).withClaim("code",code)
+                .withExpiresAt(date).sign(algorithm);
+    }
+
     //解码emailToken 获取邮箱地址
     public static String getEmailfromEmailToken(String emailToken){
         try {
@@ -39,6 +47,25 @@ public class JwtUtil {
         try {
             DecodedJWT jwt = JWT.decode(emailToken);
             return jwt.getClaim("title").asString();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    //解码emailCodeToken 获取邮件地址
+    public static String getEmailfromEmailCodeToken(String emailCodeToken){
+        try {
+            DecodedJWT jwt = JWT.decode(emailCodeToken);
+            return jwt.getClaim("email").asString();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    //解码emailToken 获取code验证码
+    public static String getCodefromEmailToken(String emailToken){
+        try {
+            DecodedJWT jwt = JWT.decode(emailToken);
+            return jwt.getClaim("code").asString();
         } catch (Exception e) {
             return null;
         }

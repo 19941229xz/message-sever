@@ -1,5 +1,7 @@
 package com.example.message.common;
 
+import com.example.message.model.EmailCodeTokenParam;
+
 /**
  * @author xiongzh
  * @date 2019.7.31
@@ -19,6 +21,8 @@ public interface EmailUtilService {
     public String getEmailToken(String email,String content,String title);
 
 
+    void sendEmailCode(String emailCodeToken);
 
-
+    String getEmailCodeToken(EmailCodeTokenParam emailCodeTokenParam);
+    boolean verifyEmailCode(String emailCodeToken,String code);
 }

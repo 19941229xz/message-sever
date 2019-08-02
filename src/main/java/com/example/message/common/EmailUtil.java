@@ -12,16 +12,16 @@ import java.util.Random;
 
 public class EmailUtil {
 
-    private static final String SHOUQUANMA = "loraavgovqphcbae";
+    //private static final String SHOUQUANMA = "loraavgovqphcbae";
     //  pljndhlocfumbede
 
 
-    public static MimeMessage createSimpleMail(Session session, String mima, String emailAddresss,String title)
+    public static MimeMessage createSimpleMail(Session session, String email,String mima, String emailAddresss,String title)
             throws Exception {
 // 创建邮件对象
         MimeMessage message = new MimeMessage(session);
 // 指明邮件的发件人
-        message.setFrom(new InternetAddress("453546138@qq.com"));
+        message.setFrom(new InternetAddress(email));
 // 指明邮件的收件人，现在发件人和收件人是一样的，那就是自己给自己发
         message.setRecipient(Message.RecipientType.TO, new InternetAddress(emailAddresss));
 // 邮件的标题
@@ -33,7 +33,7 @@ public class EmailUtil {
     }
 
 
-    public static void sendEmail(String mima,String emailAddresss,String title) throws Exception {
+    public static void sendEmail(String mima,String emailAddresss,String title,String email,String shouquanma) throws Exception {
         Properties prop = new Properties();
 // 开启debug调试，以便在控制台查看
         prop.setProperty("mail.debug", "true");
@@ -55,9 +55,9 @@ public class EmailUtil {
 // 通过session得到transport对象
         Transport ts = session.getTransport();
 // 连接邮件服务器：邮箱类型，帐号，授权码代替密码（更安全）
-        ts.connect("smtp.qq.com", "453546138", SHOUQUANMA);//后面的字符是授权码，用qq密码反正我是失败了（用自己的，别用我的，这个号是我瞎编的，为了。。。。）
+        ts.connect("smtp.qq.com", email, shouquanma);//后面的字符是授权码，用qq密码反正我是失败了（用自己的，别用我的，这个号是我瞎编的，为了。。。。）
 // 创建邮件
-        Message message = createSimpleMail(session,mima,emailAddresss,title);
+        Message message = createSimpleMail(session,email,mima,emailAddresss,title);
 // 发送邮件
         ts.sendMessage(message, message.getAllRecipients());
         ts.close();
@@ -66,6 +66,6 @@ public class EmailUtil {
 
     public static void main(String[] args) throws Exception {
 //        sendEmail("123456","276819708@qq.com");
-        System.out.println(new Random().nextInt(6)+1);
+        System.out.println(new Random().nextInt(2)+0);
     }
 }
