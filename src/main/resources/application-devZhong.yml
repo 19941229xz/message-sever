@@ -3,7 +3,7 @@ mybatis:
   type-aliases-package: com.example.message.model
 
 server:
-  port: 91
+  port: 92
 
 logging:
   level:
@@ -23,12 +23,12 @@ spring:
       default-ip-address: 39.108.127.117
   redis:
     database: 0
-    host: localhost
-    port: 6379
-    password: root
+    host: 60.205.212.112
+    port: 6380
+    password: 19971002wy
     timeout: 5000
   datasource:
-    url: jdbc:mysql://60.205.212.112:3307/Architecture_design?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
+    url: jdbc:mysql://60.205.212.112:3307/message_server?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
     username: root
     password: 19971002wy
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -65,6 +65,7 @@ eureka:
   client:
     service-url:
       defaultZone: http://39.108.127.117:10000/eureka/,http://60.205.212.112:10000/eureka/
+
   instance:
     lease-renewal-interval-in-seconds: 1
     lease-expiration-duration-in-seconds: 2
