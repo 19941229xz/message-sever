@@ -43,13 +43,13 @@ public class EmailUtil {
         prop.setProperty("mail.smtp.auth", "true");
 // 发送邮件协议名称
         prop.setProperty("mail.transport.protocol", "smtp");
-        //
+        //自定义端口
         prop.setProperty("mail.smtp.port", "465");
+        //添加ssl安全证书
         prop.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         prop.setProperty("mail.smtp.socketFactory.fallback", "false");
 
         prop.setProperty("mail.smtp.socketFactory.port", "465");
-        //
 // 开启SSL加密，否则会失败
         MailSSLSocketFactory sf = new MailSSLSocketFactory();
         sf.setTrustAllHosts(true);
