@@ -16,7 +16,7 @@ public class EmailUtil {
     //  pljndhlocfumbede
 
 
-    public static MimeMessage createSimpleMail(Session session, String email,String mima, String emailAddresss,String title)
+    public static MimeMessage createSimpleMail(Session session, String email, String mima, String emailAddresss, String title)
             throws Exception {
 // 创建邮件对象
         MimeMessage message = new MimeMessage(session);
@@ -33,7 +33,7 @@ public class EmailUtil {
     }
 
 
-    public static void sendEmail(String mima,String emailAddresss,String title,String email,String shouquanma) throws Exception {
+    public static void sendEmail(String mima, String emailAddresss, String title, String email, String shouquanma) throws Exception {
         Properties prop = new Properties();
 // 开启debug调试，以便在控制台查看
         prop.setProperty("mail.debug", "true");
@@ -43,12 +43,19 @@ public class EmailUtil {
         prop.setProperty("mail.smtp.auth", "true");
 // 发送邮件协议名称
         prop.setProperty("mail.transport.protocol", "smtp");
+        //
+        prop.setProperty("mail.smtp.port", "465");
+        prop.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        prop.setProperty("mail.smtp.socketFactory.fallback", "false");
 
+        prop.setProperty("mail.smtp.socketFactory.port", "465");
+        //
 // 开启SSL加密，否则会失败
         MailSSLSocketFactory sf = new MailSSLSocketFactory();
         sf.setTrustAllHosts(true);
         prop.put("mail.smtp.ssl.enable", "true");
         prop.put("mail.smtp.ssl.socketFactory", sf);
+        prop.put("mail.smtp.localhost", "127.0.0.1");
 
 // 创建session
         Session session = Session.getInstance(prop);
@@ -57,7 +64,7 @@ public class EmailUtil {
 // 连接邮件服务器：邮箱类型，帐号，授权码代替密码（更安全）
         ts.connect("smtp.qq.com", email, shouquanma);//后面的字符是授权码，用qq密码反正我是失败了（用自己的，别用我的，这个号是我瞎编的，为了。。。。）
 // 创建邮件
-        Message message = createSimpleMail(session,email,mima,emailAddresss,title);
+        Message message = createSimpleMail(session, email, mima, emailAddresss, title);
 // 发送邮件
         ts.sendMessage(message, message.getAllRecipients());
         ts.close();
@@ -66,6 +73,6 @@ public class EmailUtil {
 
     public static void main(String[] args) throws Exception {
 //        sendEmail("123456","276819708@qq.com");
-        System.out.println(new Random().nextInt(2)+0);
+        System.out.println(new Random().nextInt(2) + 0);
     }
 }
