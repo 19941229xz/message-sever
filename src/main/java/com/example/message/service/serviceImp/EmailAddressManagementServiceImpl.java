@@ -1,10 +1,11 @@
-package com.example.message.service;
+package com.example.message.service.serviceImp;
 
 import com.example.message.common.HttpCode;
 import com.example.message.common.MyException;
 import com.example.message.common.MyRsp;
 import com.example.message.dao.EmailAddressManagementDao;
 import com.example.message.model.EmailAddressManagement;
+import com.example.message.service.EmailAddressManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.Random;
 
 @Service("EmailAddressManagementService")
-public class EmailAddressManagementServiceImpl implements  EmailAddressManagementService{
+public class EmailAddressManagementServiceImpl implements EmailAddressManagementService {
 
     @Autowired
     EmailAddressManagementDao emailAddressManagementDao;

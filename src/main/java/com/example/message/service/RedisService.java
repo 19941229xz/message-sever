@@ -1,4 +1,4 @@
-package com.example.message.common;
+package com.example.message.service;
 
 import java.util.List;
 import java.util.Set;

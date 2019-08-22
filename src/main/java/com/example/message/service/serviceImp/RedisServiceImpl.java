@@ -1,5 +1,6 @@
-package com.example.message.common;
+package com.example.message.service.serviceImp;
 
+import com.example.message.service.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Service;

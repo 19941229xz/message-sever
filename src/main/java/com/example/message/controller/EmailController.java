@@ -1,10 +1,11 @@
-package com.example.message.common;
+package com.example.message.controller;
 
+import com.example.message.common.MyRsp;
+import com.example.message.service.EmailUtilService;
 import com.example.message.model.EmailCodeTokenParam;
 import com.example.message.model.EmailTokenParam;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

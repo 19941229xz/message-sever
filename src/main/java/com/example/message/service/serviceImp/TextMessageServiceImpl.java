@@ -1,4 +1,4 @@
-package com.example.message.common;
+package com.example.message.service.serviceImp;
 
 import com.aliyuncs.CommonRequest;
 import com.aliyuncs.CommonResponse;
@@ -8,9 +8,13 @@ import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.exceptions.ServerException;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
+import com.example.message.common.PhoneJwtUtil;
+import com.example.message.common.commonUtil;
 import com.example.message.model.Template;
 import com.example.message.service.PrivatekeyService;
+import com.example.message.service.RedisService;
 import com.example.message.service.TemplateService;
+import com.example.message.service.TextMessageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
@@ -47,7 +51,7 @@ public class TextMessageServiceImpl implements TextMessageService {
     public void sendTextMessage(String phoneToken) {
 
         // 通过token获取模板ID
-        int templateId=PhoneJwtUtil.getTemplateIdfromPhoneToken(phoneToken);
+        int templateId= PhoneJwtUtil.getTemplateIdfromPhoneToken(phoneToken);
         // 通过获取的模板ID从数据库中获取到模板信息
         Template template = templateService.getTemplateById(templateId);
 

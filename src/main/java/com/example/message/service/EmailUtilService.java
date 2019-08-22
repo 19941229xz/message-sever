@@ -1,4 +1,4 @@
-package com.example.message.common;
+package com.example.message.service;
 
 import com.example.message.model.EmailCodeTokenParam;
 

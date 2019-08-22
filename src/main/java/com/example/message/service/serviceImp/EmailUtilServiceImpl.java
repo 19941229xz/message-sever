@@ -1,15 +1,18 @@
-package com.example.message.common;
+package com.example.message.service.serviceImp;
 
-import com.example.message.common.EmailUtilService;
-import com.example.message.model.EmailAddressManagement;
+import com.example.message.common.EmailUtil;
+import com.example.message.common.HttpCode;
+import com.example.message.common.JwtUtil;
+import com.example.message.common.MyException;
 import com.example.message.model.EmailCodeTokenParam;
 import com.example.message.service.EmailAddressManagementService;
+import com.example.message.service.EmailUtilService;
 import com.example.message.service.PrivatekeyService;
+import com.example.message.service.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Random;
 
 @Service("EmailUtilService")
@@ -29,7 +32,7 @@ public class EmailUtilServiceImpl implements EmailUtilService {
     public void sendNormalText(String emailToken) {
 
         // 通过token获取邮件内容
-        String text=JwtUtil.getContentfromEmailToken(emailToken);
+        String text= JwtUtil.getContentfromEmailToken(emailToken);
         // 通过token获取邮件地址
         String emailAddress=JwtUtil.getEmailfromEmailToken(emailToken);
         // 通过token获取邮件标题

@@ -1,4 +1,4 @@
-package com.example.message.common;
+package com.example.message.service;
 
 import org.mapstruct.Mapper;
 
